@@ -1,5 +1,5 @@
 FROM node:14.11.0
-COPY client/ /app/
+COPY server/ /app/
 COPY mountains.proto /
 WORKDIR /app
 RUN npm install
