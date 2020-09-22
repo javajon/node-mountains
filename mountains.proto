@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+service MountainService {
+    rpc GetAll (Empty) returns (MountainList) {}
+    rpc Get (MountainRequestId) returns (Mountain) {}
+    rpc Insert (Mountain) returns (Mountain) {}
+    rpc Update (Mountain) returns (Mountain) {}
+    rpc Remove (MountainRequestId) returns (Empty) {}
+}
+
+message Empty {}
+
+message Mountain {
+    string id = 1;
+    string name = 2;
+    int32 elevation = 3;
+    string location = 4;
+}
+
+message MountainList {
+    repeated Mountain mountains = 1;
+}
+
+message MountainRequestId {
+    string id = 1;
+}
