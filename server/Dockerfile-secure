@@ -9,5 +9,5 @@ FROM gcr.io/distroless/nodejs:14
 WORKDIR /app
 COPY --from=build /usr/src/app ./
 EXPOSE 8321
-CMD ["node", "server.js"]
+CMD ["server.js"]
     
