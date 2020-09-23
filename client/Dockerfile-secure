@@ -1,13 +1,12 @@
 FROM node:14 AS build-env
-ADD client/ /app
-COPY mountains.proto /app
-COPY package.json /
-WORKDIR /app
-
-RUN yarn --prod
+WORKDIR /usr/src/app
+COPY mountains.proto ./
+COPY client/package*.json ./
+COPY client/src/ ./
+RUN ["npm", "install", "--production"]
 
 FROM gcr.io/distroless/nodejs:14
 COPY --from=build-env /app /app
 WORKDIR /app
 EXPOSE 3000
-CMD ["index"]
+CMD ["node", "index.js"]

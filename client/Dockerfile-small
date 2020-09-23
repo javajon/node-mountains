@@ -10,4 +10,4 @@ FROM node:14.11.0-alpine3.12
 COPY --from=build-env /app /app
 WORKDIR /app
 EXPOSE 3000
-CMD ["index"]
+CMD ["start"]

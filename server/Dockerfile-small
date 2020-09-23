@@ -10,4 +10,4 @@ FROM gcr.io/distroless/nodejs:14
 COPY --from=build-env /app /app
 WORKDIR /app
 EXPOSE 8321
-CMD ["server"]
+CMD ["start"]
