@@ -1,4 +1,5 @@
-const PROTO_PATH = "../mountains.proto";
+const PROTO_PATH = "./mountains.proto";
+const MOUNTAINS_SERVER = process.env.MOUNTAINS_SERVER || "localhost:8321";
 
 const grpc = require("grpc");
 const protoLoader = require("@grpc/proto-loader");
@@ -12,7 +13,7 @@ var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const MountainService = grpc.loadPackageDefinition(packageDefinition).MountainService;
 const client = new MountainService(
-	"localhost:8321",
+	MOUNTAINS_SERVER,
 	grpc.credentials.createInsecure()
 );
 
