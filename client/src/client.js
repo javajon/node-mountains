@@ -17,4 +17,6 @@ const client = new MountainService(
 	grpc.credentials.createInsecure()
 );
 
+console.log("Connecting to server %s", MOUNTAINS_SERVER)
+
 module.exports = client;
