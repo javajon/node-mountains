@@ -1,6 +1,7 @@
 FROM node:14.11.0
 COPY client/ /app/
 COPY mountains.proto /
+COPY package.json /
 WORKDIR /app
 RUN npm install
 EXPOSE 3000
