@@ -3,9 +3,10 @@ ADD server/ /app
 COPY mountains.proto /app
 WORKDIR /app
 
-RUN npm ci --only=production
+RUN yarn --prod
 
 FROM gcr.io/distroless/nodejs:14
 COPY --from=build-env /app /app
 WORKDIR /app
-CMD ["index"]
+EXPOSE 8321
+CMD ["server"]
