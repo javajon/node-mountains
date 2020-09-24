@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: mountains-server-$SUFFIX
-        image: registry/mountains-server-$SUFFIX:0.1.0
+        image: $REGISTRY/mountains-server-$SUFFIX:0.1.0
         imagePullPolicy: Always
         ports:
           - name: grpc

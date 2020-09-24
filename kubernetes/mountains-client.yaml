@@ -6,10 +6,11 @@ spec:
   ports:
   - name: web
     port: 3000
+    nodePort: 30300
     targetPort: web 
   selector:
     app: mountains-client-$SUFFIX
-  type: ClusterIP
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
