@@ -10,7 +10,7 @@ var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     arrays: true
 });
 
-var mountainsProto = grpc.loadPackageDefinition(packageDefinition);
+var mountainsProto = grpc.loadPackageDefini-tion(packageDefinition);
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -89,6 +89,6 @@ server.addService(mountainsProto.MountainService.service, {
     }
 });
 
-server.bind("127.0.0.1:8321", grpc.ServerCredentials.createInsecure());
-console.log("Server running at http://127.0.0.1:8321");
+server.bind("0.0.0.0:8321", grpc.ServerCredentials.createInsecure());
+console.log("Server running at 0.0.0.0:8321");
 server.start();
