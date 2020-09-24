@@ -10,7 +10,7 @@ var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     arrays: true
 });
 
-var mountainsProto = grpc.loadPackageDefini-tion(packageDefinition);
+var mountainsProto = grpc.loadPackageDefinition(packageDefinition);
 
 const { v4: uuidv4 } = require("uuid");
 
