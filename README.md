@@ -1,4 +1,4 @@
-# Exploring Node.js server application with gRPC
+# Exploring Node.js Microservice application with gRPC
 
 This project is separated into two parts:
 
@@ -10,11 +10,11 @@ To run this app locally, run the following commands in separate command line win
 - Inside the /client folder: `node index`
 - Inside the /root folder: `npm start`
 
-Then, go to http://localhost:3000/ and test it out.
+Go to http://localhost:3000/ and try the _Mountains_ application.
 
 ## Running on Kubernetes
 
-This project includes Dockerfiles to package the client and server into container images. In turn, there is a [Katacoda scenario](https://katacoda.com/javajon/courses/kubernetes-containers) that shows how these containers can run on Kubernetes.
+This project includes Dockerfiles to package the client and server into container images. In turn, there is a Katacoda scenario called [Node.js to Kubernetes](https://katacoda.com/javajon/courses/kubernetes-containers) that shows how this application runs on Kubernetes.
 
 ## References
 

@@ -1,8 +1,8 @@
 FROM node:14.11.0
-COPY client/ /app/
-COPY mountains.proto /
-COPY package.json /
-WORKDIR /app
-RUN npm install
+WORKDIR /usr/src/app
+COPY mountains.proto ./
+COPY client/package*.json ./
+COPY client/src/ ./
+RUN ["npm", "install"]
 EXPOSE 3000
 CMD ["node", "index"]

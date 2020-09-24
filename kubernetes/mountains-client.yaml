@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mountains-client-$SUFFIX
+spec:
+  ports:
+  - name: web
+    port: 3000
+    targetPort: web 
+  selector:
+    app: mountains-client-$SUFFIX
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mountains-client-$SUFFIX
+  labels:
+    app: mountains-client-$SUFFIX
+spec:
+  selector:
+    matchLabels:
+      app: mountains-client-$SUFFIX
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mountains-client-$SUFFIX
+    spec:
+      containers:
+      - name: mountains-client-$SUFFIX
+        image: $REGISTRY/mountains-client-$SUFFIX:0.1.0
+        imagePullPolicy: Always
+        ports:
+          - name: web
+            containerPort: 3000
+        env:
+          - name: MOUNTAINS_SERVER
+            value: "mountains-server-$SUFFIX:8321"
+          - name: DEBUG
+            value: "express:*"
+          - name: GRPC_VERBOSITY
+            value: "INFO"
+          - name: GRPC_TRACE
+            value: "all"

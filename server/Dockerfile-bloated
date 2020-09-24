@@ -1,8 +1,8 @@
 FROM node:14.11.0
-COPY server/ /app/
-COPY mountains.proto /
-COPY package.json /
-WORKDIR /app
-RUN npm install
+WORKDIR /usr/src/app
+COPY mountains.proto ./
+COPY server/package*.json ./
+COPY server/src/ ./
+RUN ["npm", "install"]
 EXPOSE 8321
 CMD ["node", "server.js"]

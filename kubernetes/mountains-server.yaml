@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mountains-server-$SUFFIX
+  name: mountains-server-$SUFFIX
+spec:
+  ports:
+  - port: 8321
+    targetPort: grpc
+  selector:
+    app: mountains-server-$SUFFIX
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mountains-server-$SUFFIX
+  labels:
+    app: mountains-server-$SUFFIX
+spec:
+  selector:
+    matchLabels:
+      app: mountains-server-$SUFFIX
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mountains-server-$SUFFIX
+    spec:
+      containers:
+      - name: mountains-server-$SUFFIX
+        image: registry/mountains-server-$SUFFIX:0.1.0
+        imagePullPolicy: Always
+        ports:
+          - name: grpc
+            containerPort: 8321
+        env:
+          - name: GRPC_VERBOSITY
+            value: "INFO"
+          - name: GRPC_TRACE
+            value: "all"
