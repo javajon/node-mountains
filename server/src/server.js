@@ -61,7 +61,7 @@ server.addService(mountainsProto.MountainService.service, {
 
         if (existingMountain) {
             existingMountain.name = call.request.name;
-            existingMountain.elevation = calexistingMountain.request.elevation;
+            existingMountain.elevation = call.request.elevation;
             existingMountain.location = call.request.location;
             callback(null, existingMountain);
         } else {
