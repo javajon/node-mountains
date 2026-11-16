@@ -1,12 +1,18 @@
-FROM node:14 AS build
+FROM node:24-alpine AS build
+
 WORKDIR /usr/src/app
 COPY mountains.proto ./
 COPY server/package*.json ./
 COPY server/src/ ./
 RUN ["npm", "install"]
 
-FROM gcr.io/distroless/nodejs:14
+# The final stage is Alpine, as step 5 of the lab describes. The server variant used to end
+# on gcr.io/distroless/nodejs:14 here - the same base as Dockerfile-secure - so `cat`ing it
+# showed distroless while the step said Alpine, and the small/secure comparison compared an
+# image with itself.
+FROM node:24-alpine
+
 WORKDIR /app
 COPY --from=build /usr/src/app ./
 EXPOSE 8321
-CMD ["start"]
+CMD ["node", "server.js"]

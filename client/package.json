@@ -18,10 +18,10 @@
   "author": "javajon",
   "license": "ISC",
   "dependencies": {
+    "@grpc/grpc-js": "^1.14.0",
     "@grpc/proto-loader": "^0.5.5",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "grpc": "^1.24.3",
     "hbs": "^4.1.1",
     "uuid": "^8.3.0"
   }

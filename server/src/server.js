@@ -1,6 +1,6 @@
 const PROTO_PATH = "./mountains.proto";
 
-var grpc = require("grpc");
+var grpc = require("@grpc/grpc-js");
 var protoLoader = require("@grpc/proto-loader");
 
 var packageDefinition = protoLoader.loadSync(PROTO_PATH, {
@@ -89,6 +89,22 @@ server.addService(mountainsProto.MountainService.service, {
     }
 });
 
-server.bind("0.0.0.0:8321", grpc.ServerCredentials.createInsecure());
-console.log("Server running at 0.0.0.0:8321");
-server.start();
+// bindAsync, not bind. @grpc/grpc-js has no synchronous bind: the port is opened on a
+// callback, and binding errors arrive there rather than as a thrown exception. Logging
+// "running" before the bind succeeded is how a container reports healthy while refusing
+// connections, so the message moved inside the callback.
+//
+// server.start() is gone too. It was required by the old native `grpc` package; in
+// grpc-js the server is serving as soon as bindAsync calls back, and calling start() is
+// deprecated and does nothing.
+server.bindAsync(
+    "0.0.0.0:8321",
+    grpc.ServerCredentials.createInsecure(),
+    (err, port) => {
+        if (err) {
+            console.error("Failed to bind 0.0.0.0:8321:", err.message);
+            process.exit(1);
+        }
+        console.log("Server running at 0.0.0.0:%d", port);
+    }
+);

@@ -1,13 +1,17 @@
-FROM node:14 AS build
+FROM node:24 AS build
+
 WORKDIR /usr/src/app
 COPY mountains.proto ./
 COPY server/package*.json ./
 COPY server/src/ ./
-RUN ["npm", "install", "--production"]
+RUN ["npm", "install"]
 
-FROM gcr.io/distroless/nodejs:14
+# gcr.io/distroless/nodejs is FROZEN: its newest tag is 18, and Node 18 left support in
+# April 2025. Distroless Node did not stop - it moved to one repository per major version.
+# The ENTRYPOINT is still node, so CMD is the script, not a full command line.
+FROM gcr.io/distroless/nodejs22-debian12
+
 WORKDIR /app
 COPY --from=build /usr/src/app ./
 EXPOSE 8321
 CMD ["server.js"]
-    
